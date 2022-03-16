@@ -17,8 +17,11 @@ class ResultViewController: UIViewController {
         super.viewDidLoad()
         self.navigationItem.setHidesBackButton(true, animated: false)
         getResult()
+//        getOneCodeLineResult()
     }
     
+
+
     private func getResult() {
         
         var selectedAnimals: [Animal] = []
@@ -46,5 +49,13 @@ class ResultViewController: UIViewController {
         emojiLabel.text = "Вы - \(finalAnimal.rawValue)"
         definitionLabel.text = finalAnimal.definition
     }
-  
+}
+
+extension ResultViewController {
+    private func getOneCodeLineResult() {
+        let yourAnimal = Dictionary(finalAnswers.map {($0.animal, 1)}, uniquingKeysWith: + ).max(by: {$0.value < $1.value})?.key
+        
+        emojiLabel.text = "Вы - \(yourAnimal?.rawValue ?? Character("") )"
+        definitionLabel.text = yourAnimal?.definition
+    }
 }
