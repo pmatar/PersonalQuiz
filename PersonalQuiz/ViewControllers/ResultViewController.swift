@@ -13,6 +13,12 @@ class ResultViewController: UIViewController {
     
     var finalAnswers: [Answer] = []
 
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        self.navigationItem.setHidesBackButton(true, animated: false)
+        getResult()
+    }
+    
     private func getResult() {
         
         var selectedAnimals: [Animal] = []
@@ -40,11 +46,5 @@ class ResultViewController: UIViewController {
         emojiLabel.text = "Вы - \(finalAnimal.rawValue)"
         definitionLabel.text = finalAnimal.definition
     }
-        
-
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        self.navigationItem.setHidesBackButton(true, animated: false)
-        getResult()
-    }
+  
 }
