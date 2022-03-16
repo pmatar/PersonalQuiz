@@ -8,33 +8,31 @@
 import UIKit
 
 class ResultViewController: UIViewController {
-    var finalAnswers: [Answer] = []
     @IBOutlet var emojiLabel: UILabel!
     @IBOutlet var definitionLabel: UILabel!
     
- 
-    
-    
+    var finalAnswers: [Answer] = []
+
     private func getResult() {
         
         var selectedAnimals: [Animal] = []
         var mostCommonAnimal: [Animal : Int] = [:]
-        var max = 0
+        var count = 0
         var finalAnimal: Animal!
         
         finalAnswers.forEach { answer in selectedAnimals.append(answer.animal) }
         
-        selectedAnimals.forEach { (element) in
-            if let count = mostCommonAnimal[element] {
-                mostCommonAnimal[element] = count + 1
+        selectedAnimals.forEach { (value) in
+            if let key = mostCommonAnimal[value] {
+                mostCommonAnimal[value] = key + 1
             } else {
-                mostCommonAnimal[element] = 1
+                mostCommonAnimal[value] = 1
             }
         }
         
         for (key, value) in mostCommonAnimal {
-            if value > max {
-                max = value
+            if value > count {
+                count = value
                 finalAnimal = key
             }
         }
