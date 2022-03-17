@@ -12,12 +12,15 @@ class ResultViewController: UIViewController {
     @IBOutlet var definitionLabel: UILabel!
     
     var finalAnswers: [Answer] = []
+    var finalAnimal: Animal!
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.navigationItem.setHidesBackButton(true, animated: false)
+        navigationItem.setHidesBackButton(true, animated: false)
         getResult()
+        showResult()
 //        getOneCodeLineResult()
+//        showResultTwo()
     }
     
 
@@ -27,7 +30,7 @@ class ResultViewController: UIViewController {
         var selectedAnimals: [Animal] = []
         var mostCommonAnimal: [Animal : Int] = [:]
         var count = 0
-        var finalAnimal: Animal!
+        
         
         finalAnswers.forEach { answer in selectedAnimals.append(answer.animal) }
         
@@ -45,7 +48,9 @@ class ResultViewController: UIViewController {
                 finalAnimal = key
             }
         }
-        
+    }
+    
+    private func showResult() {
         emojiLabel.text = "Вы - \(finalAnimal.rawValue)"
         definitionLabel.text = finalAnimal.definition
     }
@@ -53,9 +58,11 @@ class ResultViewController: UIViewController {
 
 extension ResultViewController {
     private func getOneCodeLineResult() {
-        let yourAnimal = Dictionary(finalAnswers.map {($0.animal, 1)}, uniquingKeysWith: + ).max(by: {$0.value < $1.value})?.key
-        
-        emojiLabel.text = "Вы - \(yourAnimal?.rawValue ?? Character("") )"
-        definitionLabel.text = yourAnimal?.definition
+        finalAnimal = Dictionary(finalAnswers.map {($0.animal, 1)}, uniquingKeysWith: + ).max(by: {$0.value < $1.value})?.key
+    }
+    
+    private func showResultTwo() {
+        emojiLabel.text = "Вы - \(finalAnimal.rawValue)"
+        definitionLabel.text = finalAnimal.definition
     }
 }
